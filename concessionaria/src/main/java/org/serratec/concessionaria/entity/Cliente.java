@@ -1,4 +1,4 @@
-package entity;
+package org.serratec.concessionaria.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;

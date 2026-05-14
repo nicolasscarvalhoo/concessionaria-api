@@ -1,6 +1,6 @@
-package repository;
+package org.serratec.concessionaria.repository;
 
-import entity.Cliente;
+import org.serratec.concessionaria.entity.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
