@@ -11,8 +11,10 @@ import java.util.UUID;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, UUID> {
 
+    boolean existsByCpf(String cpf);
+
     Optional<Cliente> findByCpf(String cpf);
-    // Ignora maíscula ou minúscula
+
     List<Cliente> findByNomeContainingIgnoreCase(String nome);
 
 }

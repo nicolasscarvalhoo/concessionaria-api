@@ -3,6 +3,7 @@ package org.serratec.concessionaria.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
+import org.serratec.concessionaria.model.VeiculoCriar;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -18,7 +19,6 @@ public class Veiculo {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @NotNull
     @ManyToOne // Um Cliente pode comprar vários veículos
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
@@ -52,4 +52,17 @@ public class Veiculo {
     private Boolean vendido;
 
     private BigDecimal valorVenda;
+
+    public Veiculo(VeiculoCriar veiculo, Cliente cliente) {
+        this.cliente = cliente;
+        this.marca = veiculo.getMarca();
+        this.modelo = veiculo.getModelo();
+        this.ano = veiculo.getAno();
+        this.valor = veiculo.getValor();
+        this.placa = veiculo.getPlaca();
+        this.maximoDesconto = veiculo.getMaximoDesconto();
+        this.vendido = veiculo.getVendido();
+        this.valorVenda = veiculo.getValorVenda();
+
+    }
 }

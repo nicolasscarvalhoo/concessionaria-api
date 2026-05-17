@@ -2,6 +2,7 @@ package org.serratec.concessionaria.service;
 
 import org.serratec.concessionaria.entity.Cliente;
 import org.serratec.concessionaria.exception.ClienteNaoEncontradoException;
+import org.serratec.concessionaria.exception.CpfJaCadastradoException;
 import org.serratec.concessionaria.model.ClienteAtualizar;
 import org.serratec.concessionaria.model.ClienteBuscaId;
 import org.serratec.concessionaria.model.ClienteCriar;
@@ -29,6 +30,9 @@ public class ClienteService {
     }
 
     public void inserir(ClienteCriar cliente) {
+        if (this.clienteRepository.existsByCpf(cliente.getCpf())) {
+            throw new CpfJaCadastradoException("Já existe um cliente cadastrado com esse CPF.");
+        }
         Cliente clienteInserir = new Cliente(cliente);
         this.clienteRepository.save(clienteInserir);
         System.out.println("Consegui salvar o dado no banco " + this.dbName);

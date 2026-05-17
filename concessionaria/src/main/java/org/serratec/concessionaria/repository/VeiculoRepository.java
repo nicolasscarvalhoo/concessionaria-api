@@ -11,12 +11,12 @@ import java.util.UUID;
 @Repository
 public interface VeiculoRepository extends JpaRepository<Veiculo, UUID> {
 
+    boolean existsByPlaca(String placa);
+
     Optional<Veiculo> findByPlaca(String placa);
 
-    // Ignora maíscula ou minúscula
     List<Veiculo> findByMarcaContainingIgnoreCase(String marca);
 
-    // Ignora maíscula ou minúscula
     List<Veiculo> findByModeloContainingIgnoreCase(String modelo);
 }
 

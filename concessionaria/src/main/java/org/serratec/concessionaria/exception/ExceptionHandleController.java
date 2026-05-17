@@ -55,4 +55,9 @@ public class ExceptionHandleController extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(ex.getMessage(), LocalDateTime.now()));
     }
 
+    @ExceptionHandler(CpfJaCadastradoException.class)
+    public ResponseEntity<ErrorMessage> handleCpfJaCadastradoException(CpfJaCadastradoException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorMessage(ex.getMessage(), LocalDateTime.now()));
+    }
+
 }
