@@ -35,11 +35,6 @@ public class ExceptionHandleController extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(ex.getMessage(), LocalDateTime.now()));
     }
 
-    @ExceptionHandler(CpfInvalidoException.class)
-    public ResponseEntity<ErrorMessage> handleCpfInvalidoException(CpfInvalidoException ex){
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessage(ex.getMessage(), LocalDateTime.now()));
-    }
-
     @ExceptionHandler(DescontoInvalidoException.class)
     public ResponseEntity<ErrorMessage> handleDescontoInvalidoException(DescontoInvalidoException ex){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessage(ex.getMessage(), LocalDateTime.now()));
