@@ -22,10 +22,10 @@ public class ClienteService {
     private String appName;
     private String dbName;
 
-    public ClienteService(ClienteRepository clienteRepository, @Value("${spring.application.name}") String name,
+    public ClienteService(ClienteRepository clienteRepository, @Value("${spring.application.name}") String appNameame,
                           @Value("${spring.datasource.url}") String dbName) {
         this.clienteRepository = clienteRepository;
-        this.appName = name;
+        this.appName = appName;
         this.dbName = dbName;
     }
 

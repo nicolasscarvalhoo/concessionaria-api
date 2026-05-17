@@ -60,4 +60,19 @@ public class ExceptionHandleController extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorMessage(ex.getMessage(), LocalDateTime.now()));
     }
 
+    @ExceptionHandler(CadastrarClienteSemTerVendidoException.class)
+    public ResponseEntity<ErrorMessage> handleCadastrarClienteSemTerVendidoException(CadastrarClienteSemTerVendidoException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessage(ex.getMessage(), LocalDateTime.now()));
+    }
+
+    @ExceptionHandler(CadastrarValorSemTerVendidoException.class)
+    public ResponseEntity<ErrorMessage> handleCadastrarValorSemTerVendidoException(CadastrarValorSemTerVendidoException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessage(ex.getMessage(), LocalDateTime.now()));
+    }
+
+    @ExceptionHandler(ClienteObrigatorioException.class)
+    public ResponseEntity<ErrorMessage> handleClienteObrigatorio(ClienteObrigatorioException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessage(ex.getMessage(), LocalDateTime.now()));
+    }
+
 }

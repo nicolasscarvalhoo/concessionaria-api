@@ -4,6 +4,9 @@
       <w>Atualizar</w>
       <w>Busca</w>
       <w>Cadastrada</w>
+      <w>Cadastrado</w>
+      <w>Cadastrar</w>
+      <w>Carro</w>
       <w>Cliente</w>
       <w>Criar</w>
       <w>Desconto</w>
@@ -12,10 +15,13 @@
       <w>Invalido</w>
       <w>Obrigatorio</w>
       <w>Veiculo</w>
+      <w>buscar</w>
       <w>cliente</w>
       <w>comprar</w>
       <w>concessionaria</w>
+      <w>deletar</w>
       <w>envie</w>
+      <w>inserir</w>
       <w>maíscula</w>
       <w>mensagem</w>
       <w>minúscula</w>
@@ -24,6 +30,7 @@
       <w>pode</w>
       <w>telefone</w>
       <w>usuário</w>
+      <w>veiculo</w>
       <w>veículos</w>
       <w>vários</w>
     </words>
