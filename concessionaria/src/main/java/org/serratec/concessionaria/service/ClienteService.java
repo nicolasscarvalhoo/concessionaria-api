@@ -22,7 +22,7 @@ public class ClienteService {
     private String appName;
     private String dbName;
 
-    public ClienteService(ClienteRepository clienteRepository, @Value("${spring.application.name}") String appNameame,
+    public ClienteService(ClienteRepository clienteRepository, @Value("${spring.application.name}") String appName,
                           @Value("${spring.datasource.url}") String dbName) {
         this.clienteRepository = clienteRepository;
         this.appName = appName;
@@ -30,6 +30,9 @@ public class ClienteService {
     }
 
     public void inserir(ClienteCriar cliente) {
+
+        cliente.setCpf(cliente.getCpf().replaceAll("\\D", ""));
+        cliente.setTelefone(cliente.getTelefone().replaceAll("\\D", ""));
         if (this.clienteRepository.existsByCpf(cliente.getCpf())) {
             throw new CpfJaCadastradoException("Já existe um cliente cadastrado com esse CPF.");
         }
@@ -82,7 +85,7 @@ public class ClienteService {
                 .orElseThrow(() -> new ClienteNaoEncontradoException("Não foi possível encontrar o cliente."));
 
         clienteNoBanco.setNome(clienteAtualizar.getNome());
-        clienteNoBanco.setTelefone(clienteAtualizar.getTelefone());
+        clienteNoBanco.setTelefone(clienteAtualizar.getTelefone().replaceAll("\\D", ""));
         clienteNoBanco.setEmail(clienteAtualizar.getEmail());
 
         this.clienteRepository.save(clienteNoBanco);

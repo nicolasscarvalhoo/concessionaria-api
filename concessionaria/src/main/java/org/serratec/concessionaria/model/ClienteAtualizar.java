@@ -16,7 +16,7 @@ public class ClienteAtualizar {
     private String nome;
 
     @NotBlank
-    @Size(min = 10, max = 11)
+    @Size(min = 10, max = 15)
     private String telefone;
 
     @NotBlank

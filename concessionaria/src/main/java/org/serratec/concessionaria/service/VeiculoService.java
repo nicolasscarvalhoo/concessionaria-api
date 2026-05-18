@@ -109,10 +109,6 @@ public class VeiculoService {
         Veiculo veiculoNoBanco = this.veiculoRepository.findById(id)
                 .orElseThrow(() -> new VeiculoNaoEncontradoException("O veículo não foi encontrado."));
 
-        if (veiculoAtualizar.getMaximoDesconto().compareTo(veiculoNoBanco.getValor()) > 0) {
-            throw new DescontoInvalidoException("O desconto máximo não pode ser maior que o valor de tabela do veículo.");
-        }
-
         if (Boolean.FALSE.equals(veiculoAtualizar.getVendido())) {
             veiculoNoBanco.setVendido(false);
             veiculoNoBanco.setValorVenda(null);
@@ -122,6 +118,12 @@ public class VeiculoService {
                 throw new ClienteObrigatorioException("Para marcar o veiculo como vendido é preciso informar o cliente.");
             } else if (veiculoAtualizar.getValorVenda() == null) {
                 throw new ValorVendaObrigatorioException("Para marcar o veiculo como vendido é preciso informar o valor da venda.");
+            }
+
+            java.math.BigDecimal valorMinimoPermitido = veiculoAtualizar.getValor().subtract(veiculoAtualizar.getMaximoDesconto());
+
+            if(veiculoAtualizar.getValorVenda().compareTo(valorMinimoPermitido) < 0) {
+                throw new DescontoInvalidoException("O valor da venda ultrapassa o desconto máximo permitido para este veículo.");
             }
 
             Cliente cliente = this.clienteRepository.findById(veiculoAtualizar.getClienteId())

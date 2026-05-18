@@ -22,13 +22,13 @@ public class Cliente {
     private String nome;
 
     @NotBlank
-    @Size(min = 10, max = 11)
+    @Size(min = 10, max = 15)
     @Column(length = 11, nullable = false)
     private String telefone;
 
     @NotBlank
-    @Size(min = 11, max = 11)
-    @Column(length = 11, unique = true, nullable= false)
+    @Size(min = 11, max = 14)
+    @Column(length = 14, unique = true, nullable= false)
     private String cpf;
 
     @NotBlank

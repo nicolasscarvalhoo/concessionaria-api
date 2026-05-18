@@ -22,7 +22,7 @@ public class ClienteBuscaId {
 
         this.id = cliente.getId();
         this.nome = cliente.getNome();
-        this.telefone = cliente.getTelefone();
+        this.telefone = formatTelefone(cliente.getTelefone());
         this.cpf = formatCPF(cliente.getCpf());
         this.email = cliente.getEmail();
 
@@ -38,6 +38,15 @@ public class ClienteBuscaId {
             return cpfFormated;
         }
         return cpf;
+    }
+
+    private String formatTelefone(String telefone) {
+        if (telefone != null && telefone.length() == 11) {
+            return "(" + telefone.substring(0, 2) + ") "
+                    + telefone.substring(2, 7) + "-"
+                    + telefone.substring(7);
+        }
+        return telefone;
     }
 
 

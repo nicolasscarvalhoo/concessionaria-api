@@ -1,6 +1,8 @@
 package org.serratec.concessionaria.exception;
 
 import org.serratec.concessionaria.model.ErrorMessage;
+import org.springframework.cglib.core.Local;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -73,6 +75,12 @@ public class ExceptionHandleController extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ClienteObrigatorioException.class)
     public ResponseEntity<ErrorMessage> handleClienteObrigatorio(ClienteObrigatorioException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessage(ex.getMessage(), LocalDateTime.now()));
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ErrorMessage> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+        String mensagem = "Não é possível apagar o cliente, pois ele está vinculado a um carro.";
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorMessage(mensagem, LocalDateTime.now()));
     }
 
 }

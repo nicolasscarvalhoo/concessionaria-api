@@ -20,7 +20,7 @@ public class Veiculo {
     private UUID id;
 
     @ManyToOne // Um Cliente pode comprar vários veículos
-    @JoinColumn(name = "cliente_id", nullable = false)
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     @NotBlank
