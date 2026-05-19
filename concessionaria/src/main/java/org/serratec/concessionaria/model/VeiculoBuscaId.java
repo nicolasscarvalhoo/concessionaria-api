@@ -34,7 +34,7 @@ public class VeiculoBuscaId {
         this.modelo = veiculo.getModelo();
         this.ano = veiculo.getAno();
         this.valor = veiculo.getValor();
-        this.placa = veiculo.getPlaca();
+        this.placa = formatPlaca(veiculo.getPlaca());
         this.maximoDesconto = veiculo.getMaximoDesconto();
         this.vendido = veiculo.getVendido();
 
@@ -43,6 +43,16 @@ public class VeiculoBuscaId {
             this.nomeCliente = veiculo.getCliente().getNome();
         }
 
+    }
+
+    public String formatPlaca(String placa) {
+        if(placa != null && placa.length() == 7) {
+            String placaFormated = "";
+            placaFormated += placa.substring(0,3) + "-";
+            placaFormated += placa.substring(3);
+            return placaFormated.toUpperCase();
+        }
+        return placa;
     }
 
 }

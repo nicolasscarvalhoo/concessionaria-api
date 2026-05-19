@@ -37,6 +37,9 @@ public class VeiculoService {
     }
 
     public void inserir(VeiculoCriar veiculo) {
+
+        veiculo.setPlaca(veiculo.getPlaca().replaceAll("-", "").trim().toUpperCase());
+
         if (veiculoRepository.existsByPlaca(veiculo.getPlaca())) {
             throw new PlacaJaCadastradaException("Já existe um veículo cadastrado com esta placa.");
         }
@@ -79,6 +82,7 @@ public class VeiculoService {
 
         if (placa != null && !placa.isBlank()) {
 
+            String placaLimpa = placa.replace("-", "").trim().toUpperCase();
             Optional<Veiculo> veiculoOpt = this.veiculoRepository.findByPlaca(placa);
             veiculoOpt.ifPresent(veiculos::add);
 
