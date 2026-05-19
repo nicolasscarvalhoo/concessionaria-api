@@ -83,7 +83,7 @@ public class VeiculoService {
         if (placa != null && !placa.isBlank()) {
 
             String placaLimpa = placa.replace("-", "").trim().toUpperCase();
-            Optional<Veiculo> veiculoOpt = this.veiculoRepository.findByPlaca(placa);
+            Optional<Veiculo> veiculoOpt = this.veiculoRepository.findByPlaca(placaLimpa);
             veiculoOpt.ifPresent(veiculos::add);
 
         } else if (marca != null && !marca.isBlank()) {

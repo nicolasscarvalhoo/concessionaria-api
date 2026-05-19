@@ -31,7 +31,7 @@ public class VeiculoCriar {
     private BigDecimal valor;
 
     @NotBlank
-    @Size(min = 7, max = 7)
+    @Size(min = 7, max = 8)
     private String placa;
 
     @NotNull

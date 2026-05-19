@@ -23,7 +23,7 @@ public class Cliente {
 
     @NotBlank
     @Size(min = 10, max = 15)
-    @Column(length = 11, nullable = false)
+    @Column(length = 15, nullable = false)
     private String telefone;
 
     @NotBlank

@@ -55,7 +55,8 @@ public class ClienteService {
 
         if(cpf != null && !cpf.isBlank()) {
 
-            Optional<Cliente> clienteOpt = this.clienteRepository.findByCpf(cpf);
+            String cpfLimpo = cpf.replaceAll("//D", "");
+            Optional<Cliente> clienteOpt = this.clienteRepository.findByCpf(cpfLimpo);
             clienteOpt.ifPresent(clientes::add);
 
         } else if(nome != null && !nome.isBlank()) {
