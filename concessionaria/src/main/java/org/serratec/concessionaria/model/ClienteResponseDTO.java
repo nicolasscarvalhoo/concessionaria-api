@@ -10,7 +10,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClienteBuscaId {
+public class ClienteResponseDTO {
 
     private UUID id;
     private String nome;
@@ -18,7 +18,7 @@ public class ClienteBuscaId {
     private String cpf;
     private String email;
 
-    public ClienteBuscaId(Cliente cliente) {
+    public ClienteResponseDTO(Cliente cliente) {
 
         this.id = cliente.getId();
         this.nome = cliente.getNome();

@@ -4,7 +4,7 @@ import org.serratec.concessionaria.entity.Cliente;
 import org.serratec.concessionaria.exception.ClienteNaoEncontradoException;
 import org.serratec.concessionaria.exception.CpfJaCadastradoException;
 import org.serratec.concessionaria.model.ClienteAtualizar;
-import org.serratec.concessionaria.model.ClienteBuscaId;
+import org.serratec.concessionaria.model.ClienteResponseDTO;
 import org.serratec.concessionaria.model.ClienteCriar;
 import org.serratec.concessionaria.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,15 +41,15 @@ public class ClienteService {
         System.out.println("Consegui salvar o dado no banco " + this.dbName);
     }
 
-    public ClienteBuscaId buscarPorId(UUID id) {
+    public ClienteResponseDTO buscarPorId(UUID id) {
         Cliente cliente = this.clienteRepository
                 .findById(id)
                 .orElseThrow(() -> new ClienteNaoEncontradoException("O cliente não foi encontrado pelo id."));
-        return new ClienteBuscaId(cliente);
+        return new ClienteResponseDTO(cliente);
 
     }
 
-    public List<ClienteBuscaId> buscar(String cpf, String nome) {
+    public List<ClienteResponseDTO> buscar(String cpf, String nome) {
 
         List<Cliente> clientes = new ArrayList<>();
 
@@ -76,12 +76,12 @@ public class ClienteService {
 
         return clientes
                 .stream()
-                .map(cliente -> new ClienteBuscaId(cliente))
+                .map(cliente -> new ClienteResponseDTO(cliente))
                 .toList();
 
     }
 
-    public ClienteBuscaId atualizar(UUID id, ClienteAtualizar clienteAtualizar) {
+    public ClienteResponseDTO atualizar(UUID id, ClienteAtualizar clienteAtualizar) {
         Cliente clienteNoBanco = this.clienteRepository.findById(id)
                 .orElseThrow(() -> new ClienteNaoEncontradoException("Não foi possível encontrar o cliente."));
 
@@ -90,7 +90,7 @@ public class ClienteService {
         clienteNoBanco.setEmail(clienteAtualizar.getEmail());
 
         this.clienteRepository.save(clienteNoBanco);
-        return new ClienteBuscaId(clienteNoBanco);
+        return new ClienteResponseDTO(clienteNoBanco);
     }
 
     public void deletar (UUID id) {
