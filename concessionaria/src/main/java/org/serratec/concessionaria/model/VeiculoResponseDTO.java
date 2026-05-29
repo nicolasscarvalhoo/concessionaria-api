@@ -14,7 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL) //Faz com que caso o carro não foi vendido, os campos valorVenda e cliente nem apareçam para o usuário.
-public class VeiculoBuscaId {
+public class VeiculoResponseDTO {
 
     private UUID id;
     private String marca;
@@ -27,7 +27,7 @@ public class VeiculoBuscaId {
     private BigDecimal valorVenda;
     private String nomeCliente;
 
-    public VeiculoBuscaId(Veiculo veiculo) {
+    public VeiculoResponseDTO(Veiculo veiculo) {
 
         this.id = veiculo.getId();
         this.marca = veiculo.getMarca();

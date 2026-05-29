@@ -5,11 +5,13 @@ import org.serratec.concessionaria.entity.Cliente;
 import org.serratec.concessionaria.entity.Veiculo;
 import org.serratec.concessionaria.exception.*;
 import org.serratec.concessionaria.model.VeiculoAtualizar;
-import org.serratec.concessionaria.model.VeiculoBuscaId;
+import org.serratec.concessionaria.model.VeiculoResponseDTO;
 import org.serratec.concessionaria.model.VeiculoCriar;
 import org.serratec.concessionaria.repository.ClienteRepository;
 import org.serratec.concessionaria.repository.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -68,15 +70,15 @@ public class VeiculoService {
 
     }
 
-    public VeiculoBuscaId buscarPorId(UUID id) {
+    public VeiculoResponseDTO buscarPorId(UUID id) {
         Veiculo veiculo = this.veiculoRepository
                 .findById(id)
                 .orElseThrow(() -> new VeiculoNaoEncontradoException("O veículo não foi encontrado pelo id."));
 
-        return new VeiculoBuscaId(veiculo);
+        return new VeiculoResponseDTO(veiculo);
     }
 
-    public List<VeiculoBuscaId> buscar(String placa, String marca, String modelo) {
+    public List<VeiculoResponseDTO> buscar(String placa, String marca, String modelo) {
 
         List<Veiculo> veiculos = new ArrayList<>();
 
@@ -105,11 +107,11 @@ public class VeiculoService {
 
         return veiculos
                 .stream()
-                .map(veiculo -> new VeiculoBuscaId(veiculo))
+                .map(veiculo -> new VeiculoResponseDTO(veiculo))
                 .toList();
     }
 
-    public VeiculoBuscaId atualizar(UUID id, VeiculoAtualizar veiculoAtualizar) {
+    public VeiculoResponseDTO atualizar(UUID id, VeiculoAtualizar veiculoAtualizar) {
         Veiculo veiculoNoBanco = this.veiculoRepository.findById(id)
                 .orElseThrow(() -> new VeiculoNaoEncontradoException("O veículo não foi encontrado."));
 
@@ -143,7 +145,7 @@ public class VeiculoService {
         veiculoNoBanco.setMaximoDesconto(veiculoAtualizar.getMaximoDesconto());
 
         this.veiculoRepository.save(veiculoNoBanco);
-        return new VeiculoBuscaId(veiculoNoBanco);
+        return new VeiculoResponseDTO(veiculoNoBanco);
 
     }
 
@@ -156,6 +158,13 @@ public class VeiculoService {
         }
 
         this.veiculoRepository.deleteById(id);
+
+    }
+
+    public Page<VeiculoResponseDTO> listarTodos(Pageable pageable) {
+
+        Page<Veiculo> veiculosPaginados = veiculoRepository.findAll(pageable);
+        return veiculosPaginados.map(veiculo -> new VeiculoResponseDTO(veiculo));
 
     }
 
